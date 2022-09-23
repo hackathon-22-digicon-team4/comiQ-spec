@@ -20,6 +20,14 @@ message Book {
   string author_id = 3;
   string description = 4;
   string image_url = 5;
+}
+
+message BookDetail {
+  string id = 1;
+  string title = 2;
+  Author author = 3;
+  string description = 4;
+  string image_url = 5;
   repeated BookPage book_pages = 6;
 }
 
