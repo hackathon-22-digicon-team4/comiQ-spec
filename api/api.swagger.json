@@ -16,14 +16,14 @@
     "application/json"
   ],
   "paths": {
-    "/v1/users/me": {
-      "get": {
-        "operationId": "User_Get",
+    "/v1/users/login": {
+      "post": {
+        "operationId": "User_Login",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/GetResponse"
+              "$ref": "#/definitions/UserServiceLoginResponse"
             }
           },
           "default": {
@@ -35,7 +35,61 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserServiceLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/v1/users/logout": {
+      "post": {
+        "operationId": "User_Logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserServiceLogoutResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/v1/users/me": {
+      "get": {
+        "operationId": "User_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserServiceGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
             "in": "query",
             "required": false,
             "type": "string"
@@ -45,10 +99,42 @@
           "User"
         ]
       }
+    },
+    "/v1/users/signup": {
+      "post": {
+        "operationId": "User_SignUp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserServiceSignUpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserServiceSignUpRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
     }
   },
   "definitions": {
-    "GetResponse": {
+    "UserServiceGetResponse": {
       "type": "object",
       "properties": {
         "user": {
@@ -56,12 +142,40 @@
         }
       }
     },
-    "modelUser": {
+    "UserServiceLoginRequest": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
         },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserServiceLoginResponse": {
+      "type": "object"
+    },
+    "UserServiceLogoutResponse": {
+      "type": "object"
+    },
+    "UserServiceSignUpRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserServiceSignUpResponse": {
+      "type": "object"
+    },
+    "modelUser": {
+      "type": "object",
+      "properties": {
         "name": {
           "type": "string"
         }
