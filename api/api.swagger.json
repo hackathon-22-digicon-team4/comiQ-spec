@@ -13,6 +13,9 @@
     },
     {
       "name": "Book"
+    },
+    {
+      "name": "Stamp"
     }
   ],
   "consumes": [
@@ -93,6 +96,28 @@
         ],
         "tags": [
           "Book"
+        ]
+      }
+    },
+    "/v1/stamps": {
+      "get": {
+        "operationId": "Stamp_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiStampServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Stamp"
         ]
       }
     },
@@ -284,6 +309,17 @@
         }
       }
     },
+    "apiStampServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "stamps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelStamp"
+          }
+        }
+      }
+    },
     "apiUserServiceGetResponse": {
       "type": "object",
       "properties": {
@@ -343,6 +379,20 @@
           "format": "int64"
         },
         "imageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "modelStamp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "iamgeUrl": {
           "type": "string"
         }
       }
