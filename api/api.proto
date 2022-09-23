@@ -2,66 +2,66 @@ syntax = "proto3";
 
 package digicon.team4.api;
 
-import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "model.proto";
 
 option go_package = "digicon/api";
 
 service User {
-    rpc Get(UserService.Get.Request) returns (UserService.Get.Response) {
-      option (google.api.http) = {
+  rpc Get(UserService.Get.Request) returns (UserService.Get.Response) {
+    option (google.api.http) = {
         get: "/v1/users/me"
       };
-    };
-    rpc Login(UserService.Login.Request) returns (UserService.Login.Response) {
-      option (google.api.http) = {
+  };
+  rpc Login(UserService.Login.Request) returns (UserService.Login.Response) {
+    option (google.api.http) = {
         post: "/v1/users/login"
         body: "*"
       };
-    };
-    rpc SignUp(UserService.SignUp.Request) returns (UserService.SignUp.Response) {
-      option (google.api.http) = {
+  };
+  rpc SignUp(UserService.SignUp.Request) returns (UserService.SignUp.Response) {
+    option (google.api.http) = {
         post: "/v1/users/signup"
         body: "*"
       };
-    };
-    rpc Logout(UserService.Logout.Request) returns (UserService.Logout.Response) {
-      option (google.api.http) = {
+  };
+  rpc Logout(UserService.Logout.Request) returns (UserService.Logout.Response) {
+    option (google.api.http) = {
         post: "/v1/users/logout"
       };
-    };
+  };
 };
 
 message UserService {
-    message Get {
-      message Request {
-        string id = 1;
-      }
-      message Response {
-        model.User user = 1;
-      }
+  message Get {
+    message Request {
+      string id = 1;
     }
-    message SignUp {
-      message Request {
-        string id = 1;
-        string password = 2;
-      }
-      message Response {
-      }
+    message Response {
+      model.User user = 1;
     }
-    message Login {
-      message Request {
-        string id = 1;
-        string password = 2;
-      }
-      message Response {
-      }
+  }
+  message SignUp {
+    message Request {
+      string id = 1;
+      string password = 2;
     }
-    message Logout {
-      message Request {
-      }
-      message Response {
-      }
+    message Response {
     }
+  }
+  message Login {
+    message Request {
+      string id = 1;
+      string password = 2;
+    }
+    message Response {
+    }
+  }
+  message Logout {
+    message Request {
+    }
+    message Response {
+    }
+  }
 }
