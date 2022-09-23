@@ -7,6 +7,9 @@
   "tags": [
     {
       "name": "User"
+    },
+    {
+      "name": "Author"
     }
   ],
   "consumes": [
@@ -16,6 +19,28 @@
     "application/json"
   ],
   "paths": {
+    "/v1/authors": {
+      "get": {
+        "operationId": "Author_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/AuthorServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Author"
+        ]
+      }
+    },
     "/v1/users/login": {
       "post": {
         "operationId": "User_Login",
@@ -134,6 +159,17 @@
     }
   },
   "definitions": {
+    "AuthorServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "authors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelAuthor"
+          }
+        }
+      }
+    },
     "UserServiceGetResponse": {
       "type": "object",
       "properties": {
@@ -172,6 +208,20 @@
     },
     "UserServiceSignUpResponse": {
       "type": "object"
+    },
+    "modelAuthor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        }
+      }
     },
     "modelUser": {
       "type": "object",
