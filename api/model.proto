@@ -5,7 +5,7 @@ package digicon.team4.model;
 option go_package = "digicon/api";
 
 message User {
-    string name = 1;
+    string id = 1;
 }
 
 message Author {

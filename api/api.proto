@@ -36,7 +36,7 @@ service User {
 message UserService {
     message Get {
       message Request {
-        string name = 1;
+        string id = 1;
       }
       message Response {
         model.User user = 1;
@@ -44,7 +44,7 @@ message UserService {
     }
     message SignUp {
       message Request {
-        string name = 1;
+        string id = 1;
         string password = 2;
       }
       message Response {
