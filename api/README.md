@@ -4,6 +4,7 @@
 
 - [api.proto](./api.proto) が、API の定義
 - [model.proto](./model.proto) が、モデルの定義
+- [api.swagger.json](./api.swagger.json)がprotobufから自動生成したoas
 
 ## 認証
 
