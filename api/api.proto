@@ -14,15 +14,54 @@ service User {
         get: "/v1/users/me"
       };
     };
+    rpc Login(UserService.Login.Request) returns (UserService.Login.Response) {
+      option (google.api.http) = {
+        post: "/v1/users/login"
+        body: "*"
+      };
+    };
+    rpc SignUp(UserService.SignUp.Request) returns (UserService.SignUp.Response) {
+      option (google.api.http) = {
+        post: "/v1/users/signup"
+        body: "*"
+      };
+    };
+    rpc Logout(UserService.Logout.Request) returns (UserService.Logout.Response) {
+      option (google.api.http) = {
+        post: "/v1/users/logout"
+      };
+    };
 };
 
 message UserService {
     message Get {
       message Request {
-        string id = 1;
+        string name = 1;
       }
       message Response {
         model.User user = 1;
+      }
+    }
+    message SignUp {
+      message Request {
+        string name = 1;
+        string password = 2;
+      }
+      message Response {
+      }
+    }
+    message Login {
+      message Request {
+        string id = 1;
+        string password = 2;
+      }
+      message Response {
+      }
+    }
+    message Logout {
+      message Request {
+      }
+      message Response {
       }
     }
 }
