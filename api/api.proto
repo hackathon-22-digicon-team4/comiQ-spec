@@ -83,3 +83,38 @@ message AuthorService {
     }
   }
 }
+
+service Book {
+  rpc List(BookService.List.Request) returns (BookService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/books"
+      };
+  };
+  rpc Get(BookService.Get.Request) returns (BookService.Get.Response) {
+    option (google.api.http) = {
+        get: "/v1/books/{id}"
+      };
+  };
+}
+
+message BookService {
+  message Get {
+    message Request {
+      string id = 1;
+    }
+    message Response {
+      model.Book book = 1;
+    }
+  }
+  message List {
+    message Request {
+    }
+    message Response {
+      string id = 1;
+      string title = 2;
+      string author_id = 3;
+      string description = 4;
+      string image_url = 5;
+    }
+  }
+}
