@@ -7,6 +7,18 @@
   "tags": [
     {
       "name": "User"
+    },
+    {
+      "name": "Author"
+    },
+    {
+      "name": "Book"
+    },
+    {
+      "name": "Stamp"
+    },
+    {
+      "name": "BookUserStamp"
     }
   ],
   "consumes": [
@@ -16,6 +28,222 @@
     "application/json"
   ],
   "paths": {
+    "/v1/authors": {
+      "get": {
+        "operationId": "Author_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiAuthorServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Author"
+        ]
+      }
+    },
+    "/v1/book_user_stamps": {
+      "get": {
+        "operationId": "BookUserStamp_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBookUserStampServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BookUserStamp"
+        ]
+      },
+      "post": {
+        "operationId": "BookUserStamp_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/BookUserStampServiceCreateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookUserStampServiceCreateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BookUserStamp"
+        ]
+      }
+    },
+    "/v1/books": {
+      "get": {
+        "operationId": "Book_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBookServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Book"
+        ]
+      }
+    },
+    "/v1/books/{id}": {
+      "get": {
+        "operationId": "Book_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBookServiceGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Book"
+        ]
+      }
+    },
+    "/v1/stamps": {
+      "get": {
+        "operationId": "Stamp_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiStampServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Stamp"
+        ]
+      }
+    },
+    "/v1/users/login": {
+      "post": {
+        "operationId": "User_Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserServiceLoginResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserServiceLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/v1/users/logout": {
+      "post": {
+        "operationId": "User_Logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserServiceLogoutResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
     "/v1/users/me": {
       "get": {
         "operationId": "User_Get",
@@ -23,7 +251,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/GetResponse"
+              "$ref": "#/definitions/apiUserServiceGetResponse"
             }
           },
           "default": {
@@ -45,10 +273,136 @@
           "User"
         ]
       }
+    },
+    "/v1/users/signup": {
+      "post": {
+        "operationId": "User_SignUp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserServiceSignUpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserServiceSignUpRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
     }
   },
   "definitions": {
-    "GetResponse": {
+    "BookUserStampServiceCreateRequest": {
+      "type": "object",
+      "properties": {
+        "bookUserStamp": {
+          "$ref": "#/definitions/modelBookUserStamp"
+        }
+      }
+    },
+    "BookUserStampServiceCreateResponse": {
+      "type": "object"
+    },
+    "UserServiceLoginRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserServiceLoginResponse": {
+      "type": "object"
+    },
+    "UserServiceLogoutResponse": {
+      "type": "object"
+    },
+    "UserServiceSignUpRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserServiceSignUpResponse": {
+      "type": "object"
+    },
+    "apiAuthorServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "authors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelAuthor"
+          }
+        }
+      }
+    },
+    "apiBookServiceGetResponse": {
+      "type": "object",
+      "properties": {
+        "book": {
+          "$ref": "#/definitions/modelBookDetail"
+        }
+      }
+    },
+    "apiBookServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "books": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelBook"
+          }
+        }
+      }
+    },
+    "apiBookUserStampServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "bookUserStamps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelBookUserStamp"
+          }
+        }
+      }
+    },
+    "apiStampServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "stamps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelStamp"
+          }
+        }
+      }
+    },
+    "apiUserServiceGetResponse": {
       "type": "object",
       "properties": {
         "user": {
@@ -56,13 +410,128 @@
         }
       }
     },
-    "modelUser": {
+    "modelAuthor": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
         },
         "name": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "modelBook": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "modelBookDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "$ref": "#/definitions/modelAuthor"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "bookPages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelBookPage"
+          }
+        }
+      }
+    },
+    "modelBookPage": {
+      "type": "object",
+      "properties": {
+        "bookId": {
+          "type": "string"
+        },
+        "pageNum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "imageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "modelBookUserStamp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "bookId": {
+          "type": "string"
+        },
+        "pageNum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "xInch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "yInch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "stampId": {
+          "type": "string"
+        }
+      }
+    },
+    "modelStamp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "iamgeUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "modelUser": {
+      "type": "object",
+      "properties": {
+        "id": {
           "type": "string"
         }
       }

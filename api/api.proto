@@ -2,27 +2,168 @@ syntax = "proto3";
 
 package digicon.team4.api;
 
-import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "model.proto";
 
 option go_package = "digicon/api";
 
 service User {
-    rpc Get(UserService.Get.Request) returns (UserService.Get.Response) {
-      option (google.api.http) = {
+  rpc Get(UserService.Get.Request) returns (UserService.Get.Response) {
+    option (google.api.http) = {
         get: "/v1/users/me"
       };
-    };
+  };
+  rpc Login(UserService.Login.Request) returns (UserService.Login.Response) {
+    option (google.api.http) = {
+        post: "/v1/users/login"
+        body: "*"
+      };
+  };
+  rpc SignUp(UserService.SignUp.Request) returns (UserService.SignUp.Response) {
+    option (google.api.http) = {
+        post: "/v1/users/signup"
+        body: "*"
+      };
+  };
+  rpc Logout(UserService.Logout.Request) returns (UserService.Logout.Response) {
+    option (google.api.http) = {
+        post: "/v1/users/logout"
+      };
+  };
 };
 
 message UserService {
-    message Get {
-      message Request {
-        string id = 1;
-      }
-      message Response {
-        model.User user = 1;
-      }
+  message Get {
+    message Request {
+      string id = 1;
     }
+    message Response {
+      model.User user = 1;
+    }
+  }
+  message SignUp {
+    message Request {
+      string id = 1;
+      string password = 2;
+    }
+    message Response {
+    }
+  }
+  message Login {
+    message Request {
+      string id = 1;
+      string password = 2;
+    }
+    message Response {
+    }
+  }
+  message Logout {
+    message Request {
+    }
+    message Response {
+    }
+  }
+}
+
+service Author {
+  rpc List(AuthorService.List.Request) returns (AuthorService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/authors"
+      };
+  };
+}
+
+message AuthorService {
+  message List {
+    message Request {
+    }
+    message Response {
+      repeated model.Author authors = 1;
+    }
+  }
+}
+
+service Book {
+  rpc List(BookService.List.Request) returns (BookService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/books"
+      };
+  };
+  rpc Get(BookService.Get.Request) returns (BookService.Get.Response) {
+    option (google.api.http) = {
+        get: "/v1/books/{id}"
+      };
+  };
+}
+
+message BookService {
+  message Get {
+    message Request {
+      string id = 1;
+    }
+    message Response {
+      model.BookDetail book = 1;
+    }
+  }
+  message List {
+    message Request {
+    }
+    message Response {
+      repeated model.Book books = 1;
+    }
+  }
+}
+
+service Stamp {
+  rpc List(StampService.List.Request) returns (StampService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/stamps"
+      };
+  };
+}
+
+message StampService {
+  message List {
+    message Request {
+    }
+    message Response {
+      repeated model.Stamp stamps = 1;
+    }
+  }
+}
+
+service BookUserStamp {
+  rpc List(BookUserStampService.List.Request)
+  returns (BookUserStampService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/book_user_stamps"
+      };
+  };
+  rpc Create(BookUserStampService.Create.Request)
+  returns (BookUserStampService.Create.Response) {
+    option (google.api.http) = {
+        post: "/v1/book_user_stamps"
+        body: "*"
+      };
+  };
+}
+
+message BookUserStampService {
+  message List {
+    message Request {
+      string book_id = 1;
+      string user_id = 2;
+    }
+    message Response {
+      repeated model.BookUserStamp book_user_stamps = 1;
+    }
+  }
+  message Create {
+    message Request {
+      model.BookUserStamp book_user_stamp = 1;
+    }
+    message Response {
+    }
+  }
 }
