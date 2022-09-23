@@ -103,18 +103,14 @@ message BookService {
       string id = 1;
     }
     message Response {
-      model.Book book = 1;
+      model.BookDetail book = 1;
     }
   }
   message List {
     message Request {
     }
     message Response {
-      string id = 1;
-      string title = 2;
-      string author_id = 3;
-      string description = 4;
-      string image_url = 5;
+      repeated model.Book books = 1;
     }
   }
 }
@@ -127,13 +123,47 @@ service Stamp {
   };
 }
 
-
 message StampService {
   message List {
     message Request {
     }
     message Response {
       repeated model.Stamp stamps = 1;
+    }
+  }
+}
+
+service BookUserStamp {
+  rpc List(BookUserStampService.List.Request)
+  returns (BookUserStampService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/book_user_stamps"
+      };
+  };
+  rpc Create(BookUserStampService.Create.Request)
+  returns (BookUserStampService.Create.Response) {
+    option (google.api.http) = {
+        post: "/v1/book_user_stamps"
+        body: "*"
+      };
+  };
+}
+
+message BookUserStampService {
+  message List {
+    message Request {
+      string book_id = 1;
+      string user_id = 2;
+    }
+    message Response {
+      repeated model.BookUserStamp book_user_stamps = 1;
+    }
+  }
+  message Create {
+    message Request {
+      model.BookUserStamp book_user_stamp = 1;
+    }
+    message Response {
     }
   }
 }
