@@ -16,6 +16,9 @@
     },
     {
       "name": "Stamp"
+    },
+    {
+      "name": "BookUserStamp"
     }
   ],
   "consumes": [
@@ -44,6 +47,72 @@
         },
         "tags": [
           "Author"
+        ]
+      }
+    },
+    "/v1/book_user_stamps": {
+      "get": {
+        "operationId": "BookUserStamp_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBookUserStampServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BookUserStamp"
+        ]
+      },
+      "post": {
+        "operationId": "BookUserStamp_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/BookUserStampServiceCreateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookUserStampServiceCreateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BookUserStamp"
         ]
       }
     },
@@ -239,6 +308,17 @@
     }
   },
   "definitions": {
+    "BookUserStampServiceCreateRequest": {
+      "type": "object",
+      "properties": {
+        "bookUserStamp": {
+          "$ref": "#/definitions/modelBookUserStamp"
+        }
+      }
+    },
+    "BookUserStampServiceCreateResponse": {
+      "type": "object"
+    },
     "UserServiceLoginRequest": {
       "type": "object",
       "properties": {
@@ -285,27 +365,29 @@
       "type": "object",
       "properties": {
         "book": {
-          "$ref": "#/definitions/modelBook"
+          "$ref": "#/definitions/modelBookDetail"
         }
       }
     },
     "apiBookServiceListResponse": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "authorId": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "imageUrl": {
-          "type": "string"
+        "books": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelBook"
+          }
+        }
+      }
+    },
+    "apiBookUserStampServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "bookUserStamps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelBookUserStamp"
+          }
         }
       }
     },
@@ -359,6 +441,26 @@
         },
         "imageUrl": {
           "type": "string"
+        }
+      }
+    },
+    "modelBookDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "$ref": "#/definitions/modelAuthor"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
         },
         "bookPages": {
           "type": "array",
@@ -379,6 +481,35 @@
           "format": "int64"
         },
         "imageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "modelBookUserStamp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "bookId": {
+          "type": "string"
+        },
+        "pageNum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "xInch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "yInch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "stampId": {
           "type": "string"
         }
       }
