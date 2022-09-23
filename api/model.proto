@@ -5,6 +5,41 @@ package digicon.team4.model;
 option go_package = "digicon/api";
 
 message User {
+    string name = 1;
+}
+
+message Author {
     string id = 1;
     string name = 2;
+    string imageURL = 3;
+}
+
+message Book {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+    string imageURL = 4;
+    string authorID = 5;
+}
+
+message BookPage {
+    string book_id = 1;
+    uint32 page_num = 2;
+    string imageURL = 3;
+}
+
+message Stamp {
+    string id = 1;
+    string name = 2;
+    string iamgeURL = 3;
+}
+
+message BookUserStamp {
+    string id = 1;
+    string bookID = 2;
+    uint32 pageNum = 3;
+    uint32 x_inch = 4;
+    uint32 y_inch = 5;
+    string userID = 6;
+    string stampID = 7;
 }
