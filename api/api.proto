@@ -118,3 +118,22 @@ message BookService {
     }
   }
 }
+
+service Stamp {
+  rpc List(StampService.List.Request) returns (StampService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/stamps"
+      };
+  };
+}
+
+
+message StampService {
+  message List {
+    message Request {
+    }
+    message Response {
+      repeated model.Stamp stamps = 1;
+    }
+  }
+}
