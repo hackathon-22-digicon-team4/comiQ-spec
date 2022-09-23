@@ -65,3 +65,21 @@ message UserService {
     }
   }
 }
+
+service Author {
+  rpc List(AuthorService.List.Request) returns (AuthorService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/authors"
+      };
+  };
+}
+
+message AuthorService {
+  message List {
+    message Request {
+    }
+    message Response {
+      repeated model.Author authors = 1;
+    }
+  }
+}
