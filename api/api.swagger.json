@@ -89,7 +89,7 @@
         },
         "parameters": [
           {
-            "name": "name",
+            "name": "id",
             "in": "query",
             "required": false,
             "type": "string"
@@ -162,7 +162,7 @@
     "UserServiceSignUpRequest": {
       "type": "object",
       "properties": {
-        "name": {
+        "id": {
           "type": "string"
         },
         "password": {
@@ -176,7 +176,7 @@
     "modelUser": {
       "type": "object",
       "properties": {
-        "name": {
+        "id": {
           "type": "string"
         }
       }
