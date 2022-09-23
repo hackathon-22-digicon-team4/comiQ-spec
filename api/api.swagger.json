@@ -10,6 +10,9 @@
     },
     {
       "name": "Author"
+    },
+    {
+      "name": "Book"
     }
   ],
   "consumes": [
@@ -26,7 +29,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/AuthorServiceListResponse"
+              "$ref": "#/definitions/apiAuthorServiceListResponse"
             }
           },
           "default": {
@@ -38,6 +41,58 @@
         },
         "tags": [
           "Author"
+        ]
+      }
+    },
+    "/v1/books": {
+      "get": {
+        "operationId": "Book_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBookServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Book"
+        ]
+      }
+    },
+    "/v1/books/{id}": {
+      "get": {
+        "operationId": "Book_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBookServiceGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Book"
         ]
       }
     },
@@ -102,7 +157,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/UserServiceGetResponse"
+              "$ref": "#/definitions/apiUserServiceGetResponse"
             }
           },
           "default": {
@@ -159,25 +214,6 @@
     }
   },
   "definitions": {
-    "AuthorServiceListResponse": {
-      "type": "object",
-      "properties": {
-        "authors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/modelAuthor"
-          }
-        }
-      }
-    },
-    "UserServiceGetResponse": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "$ref": "#/definitions/modelUser"
-        }
-      }
-    },
     "UserServiceLoginRequest": {
       "type": "object",
       "properties": {
@@ -209,6 +245,53 @@
     "UserServiceSignUpResponse": {
       "type": "object"
     },
+    "apiAuthorServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "authors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelAuthor"
+          }
+        }
+      }
+    },
+    "apiBookServiceGetResponse": {
+      "type": "object",
+      "properties": {
+        "book": {
+          "$ref": "#/definitions/modelBook"
+        }
+      }
+    },
+    "apiBookServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "apiUserServiceGetResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/modelUser"
+        }
+      }
+    },
     "modelAuthor": {
       "type": "object",
       "properties": {
@@ -217,6 +300,47 @@
         },
         "name": {
           "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "modelBook": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "bookPages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelBookPage"
+          }
+        }
+      }
+    },
+    "modelBookPage": {
+      "type": "object",
+      "properties": {
+        "bookId": {
+          "type": "string"
+        },
+        "pageNum": {
+          "type": "integer",
+          "format": "int64"
         },
         "imageUrl": {
           "type": "string"
