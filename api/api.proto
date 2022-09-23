@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package digicon.team4.api;
+package comiq.api;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "model.proto";
 
-option go_package = "digicon/api";
+option go_package = "comiq/api";
 
 service User {
   rpc Get(UserService.Get.Request) returns (UserService.Get.Response) {
