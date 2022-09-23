@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package digicon.team4.model;
+
+option go_package = "digicon/api";
+
+message User {
+    string id = 1;
+    string name = 2;
+}
