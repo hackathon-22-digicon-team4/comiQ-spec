@@ -57,4 +57,5 @@ message BookUserStamp {
   uint32 y = 5;
   string user_id = 6;
   string stamp_id = 7;
+  string book_page_image_url = 8;
 }

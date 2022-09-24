@@ -105,6 +105,15 @@ service BookSeries {
         get: "/v1/book_series"
       };
   };
+  /*
+  ある作品の書籍一覧を取得する
+  */
+  rpc BookList(BookSeriesService.BookList.Request)
+  returns (BookSeriesService.BookList.Response) {
+    option (google.api.http) = {
+        get: "/v1/book_series/{id}/books"
+      };
+  };
 }
 
 message BookSeriesService {
@@ -115,23 +124,23 @@ message BookSeriesService {
       repeated model.BookSeries bookseries = 1;
     }
   }
+  message BookList {
+    message Request {
+      string id = 1;
+    }
+    message Response {
+      repeated model.Book books = 1;
+    }
+  }
 }
 
 service Book {
-  /*
-  ある作品の書籍一覧を取得する
-  */
-  rpc List(BookService.List.Request) returns (BookService.List.Response) {
-    option (google.api.http) = {
-        get: "/v1/book_series/{book_series_id}/books"
-      };
-  };
   /*
   書籍の詳細を取得する
   */
   rpc Get(BookService.Get.Request) returns (model.BookDetail) {
     option (google.api.http) = {
-        get: "/v1/book_series/{book_series_id}/books/{book_id}"
+        get: "/v1/books/{id}"
       };
   };
 }
@@ -139,16 +148,7 @@ service Book {
 message BookService {
   message Get {
     message Request {
-      string book_series_id = 1;
-      string book_id = 2;
-    }
-  }
-  message List {
-    message Request {
-      string book_series_id = 1;
-    }
-    message Response {
-      repeated model.Book books = 1;
+      string id = 1;
     }
   }
 }
@@ -187,7 +187,7 @@ service BookUserStamp {
   /*
   ユーザーが押したスタンプ情報を登録する
   */
-  rpc Create(model.BookUserStamp)
+  rpc Create(BookUserStampService.Create.Request)
   returns (BookUserStampService.Create.Response) {
     option (google.api.http) = {
         post: "/v1/book_user_stamps"
@@ -211,6 +211,7 @@ message BookUserStampService {
       string book_series_id = 1;
       string book_id = 2;
       string user_id = 3;
+      string stamp_id = 4;
     }
     message Response {
       repeated model.BookUserStamp book_user_stamps = 1;
@@ -226,6 +227,7 @@ message BookUserStampService {
       string stamp_id = 6;
     }
     message Response {
+      string id = 1;
     }
   }
   message Delete {
