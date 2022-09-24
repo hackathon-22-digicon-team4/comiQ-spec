@@ -4,7 +4,7 @@ set -ex
 
 BUCKET_NAME=$1
 LEGION=${2:-ap-northeast-1}
-PROFILE=${3:-serverless-apps}
+PROFILE=${3:-comiq}
 
 # バケットの作成
 # リージョンを指定しないとエラーになるので明示的に指定する
