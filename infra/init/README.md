@@ -4,5 +4,5 @@
   * tfstate管理用のS3はterraformで管理しない方がよいため
 
 ```bash
-$ bash ./init_terraform_bucket.sh digicon-team14-tfstate
+$ bash ./init_terraform_bucket.sh comiq-tfstate
 ```
