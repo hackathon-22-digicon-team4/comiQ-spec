@@ -77,15 +77,15 @@
         ]
       }
     },
-    "/v1/book_series/{bookSeriesId}/books": {
+    "/v1/book_series/{id}/books": {
       "get": {
         "summary": "ある作品の書籍一覧を取得する",
-        "operationId": "Book_List",
+        "operationId": "BookSeries_BookList",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiBookServiceListResponse"
+              "$ref": "#/definitions/BookSeriesServiceBookListResponse"
             }
           },
           "default": {
@@ -97,51 +97,14 @@
         },
         "parameters": [
           {
-            "name": "bookSeriesId",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
         "tags": [
-          "Book"
-        ]
-      }
-    },
-    "/v1/book_series/{bookSeriesId}/books/{bookId}": {
-      "get": {
-        "summary": "書籍の詳細を取得する",
-        "operationId": "Book_Get",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/modelBookDetail"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "bookSeriesId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "bookId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Book"
+          "BookSeries"
         ]
       }
     },
@@ -181,6 +144,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "stampId",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -210,7 +179,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/modelBookUserStamp"
+              "$ref": "#/definitions/BookUserStampServiceCreateRequest"
             }
           }
         ],
@@ -247,6 +216,37 @@
         ],
         "tags": [
           "BookUserStamp"
+        ]
+      }
+    },
+    "/v1/books/{id}": {
+      "get": {
+        "summary": "書籍の詳細を取得する",
+        "operationId": "Book_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/modelBookDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Book"
         ]
       }
     },
@@ -387,8 +387,50 @@
     }
   },
   "definitions": {
+    "BookSeriesServiceBookListResponse": {
+      "type": "object",
+      "properties": {
+        "books": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelBook"
+          }
+        }
+      }
+    },
+    "BookUserStampServiceCreateRequest": {
+      "type": "object",
+      "properties": {
+        "bookId": {
+          "type": "string"
+        },
+        "pageNum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "x": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "y": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "stampId": {
+          "type": "string"
+        }
+      }
+    },
     "BookUserStampServiceCreateResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
     },
     "BookUserStampServiceDeleteResponse": {
       "type": "object"
@@ -442,17 +484,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/modelBookSeries"
-          }
-        }
-      }
-    },
-    "apiBookServiceListResponse": {
-      "type": "object",
-      "properties": {
-        "books": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/modelBook"
           }
         }
       }
@@ -593,6 +624,9 @@
           "type": "string"
         },
         "stampId": {
+          "type": "string"
+        },
+        "bookPageImageUrl": {
           "type": "string"
         }
       }
