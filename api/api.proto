@@ -223,8 +223,7 @@ message BookUserStampService {
       uint32 page_num = 2;
       uint32 x = 3;
       uint32 y = 4;
-      string user_id = 5;
-      string stamp_id = 6;
+      string stamp_id = 5;
     }
     message Response {
       string id = 1;
