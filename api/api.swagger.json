@@ -416,9 +416,6 @@
           "type": "integer",
           "format": "int64"
         },
-        "userId": {
-          "type": "string"
-        },
         "stampId": {
           "type": "string"
         }
