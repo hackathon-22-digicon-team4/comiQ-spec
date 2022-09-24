@@ -9,23 +9,35 @@ import "model.proto";
 option go_package = "comiq/api";
 
 service User {
-  rpc Get(UserService.Get.Request) returns (UserService.Get.Response) {
+  /*
+  session情報からユーザー情報を取得する
+  */
+  rpc Get(UserService.Get.Request) returns (model.User) {
     option (google.api.http) = {
         get: "/v1/users/me"
       };
   };
+  /*
+  ログインする
+  */
   rpc Login(UserService.Login.Request) returns (UserService.Login.Response) {
     option (google.api.http) = {
         post: "/v1/users/login"
         body: "*"
       };
   };
+  /*
+  ユーザーを登録する
+  */
   rpc SignUp(UserService.SignUp.Request) returns (UserService.SignUp.Response) {
     option (google.api.http) = {
         post: "/v1/users/signup"
         body: "*"
       };
   };
+  /*
+  ログアウトする
+  */
   rpc Logout(UserService.Logout.Request) returns (UserService.Logout.Response) {
     option (google.api.http) = {
         post: "/v1/users/logout"
@@ -36,10 +48,6 @@ service User {
 message UserService {
   message Get {
     message Request {
-      string id = 1;
-    }
-    message Response {
-      model.User user = 1;
     }
   }
   message SignUp {
@@ -67,6 +75,9 @@ message UserService {
 }
 
 service Author {
+  /*
+  作者一覧を取得する
+  */
   rpc List(AuthorService.List.Request) returns (AuthorService.List.Response) {
     option (google.api.http) = {
         get: "/v1/authors"
@@ -84,13 +95,50 @@ message AuthorService {
   }
 }
 
-service Book {
-  rpc List(BookService.List.Request) returns (BookService.List.Response) {
+service BookSeries {
+  /*
+  作品一覧を取得する
+  */
+  rpc List(BookSeriesService.List.Request)
+  returns (BookSeriesService.List.Response) {
     option (google.api.http) = {
-        get: "/v1/books"
+        get: "/v1/book_series"
       };
   };
-  rpc Get(BookService.Get.Request) returns (BookService.Get.Response) {
+  /*
+  ある作品の書籍一覧を取得する
+  */
+  rpc BookList(BookSeriesService.BookList.Request)
+  returns (BookSeriesService.BookList.Response) {
+    option (google.api.http) = {
+        get: "/v1/book_series/{id}/books"
+      };
+  };
+}
+
+message BookSeriesService {
+  message List {
+    message Request {
+    }
+    message Response {
+      repeated model.BookSeries bookseries = 1;
+    }
+  }
+  message BookList {
+    message Request {
+      string id = 1;
+    }
+    message Response {
+      repeated model.Book books = 1;
+    }
+  }
+}
+
+service Book {
+  /*
+  書籍の詳細を取得する
+  */
+  rpc Get(BookService.Get.Request) returns (model.BookDetail) {
     option (google.api.http) = {
         get: "/v1/books/{id}"
       };
@@ -102,20 +150,13 @@ message BookService {
     message Request {
       string id = 1;
     }
-    message Response {
-      model.BookDetail book = 1;
-    }
-  }
-  message List {
-    message Request {
-    }
-    message Response {
-      repeated model.Book books = 1;
-    }
   }
 }
 
 service Stamp {
+  /*
+  スタンプ一覧を取得する
+  */
   rpc List(StampService.List.Request) returns (StampService.List.Response) {
     option (google.api.http) = {
         get: "/v1/stamps"
@@ -134,12 +175,18 @@ message StampService {
 }
 
 service BookUserStamp {
+  /*
+  ユーザーが押したスタンプ一覧を取得する
+  */
   rpc List(BookUserStampService.List.Request)
   returns (BookUserStampService.List.Response) {
     option (google.api.http) = {
         get: "/v1/book_user_stamps"
       };
   };
+  /*
+  ユーザーが押したスタンプ情報を登録する
+  */
   rpc Create(BookUserStampService.Create.Request)
   returns (BookUserStampService.Create.Response) {
     option (google.api.http) = {
@@ -147,13 +194,24 @@ service BookUserStamp {
         body: "*"
       };
   };
+  /*
+  ユーザーが押したスタンプ情報を削除する
+  */
+  rpc Delete(BookUserStampService.Delete.Request)
+  returns (BookUserStampService.Delete.Response) {
+    option (google.api.http) = {
+        delete: "/v1/book_user_stamps/{id}"
+      };
+  };
 }
 
 message BookUserStampService {
   message List {
     message Request {
-      string book_id = 1;
-      string user_id = 2;
+      string book_series_id = 1;
+      string book_id = 2;
+      string user_id = 3;
+      string stamp_id = 4;
     }
     message Response {
       repeated model.BookUserStamp book_user_stamps = 1;
@@ -161,7 +219,20 @@ message BookUserStampService {
   }
   message Create {
     message Request {
-      model.BookUserStamp book_user_stamp = 1;
+      string book_id = 1;
+      uint32 page_num = 2;
+      uint32 x = 3;
+      uint32 y = 4;
+      string user_id = 5;
+      string stamp_id = 6;
+    }
+    message Response {
+      string id = 1;
+    }
+  }
+  message Delete {
+    message Request {
+      string id = 1;
     }
     message Response {
     }
