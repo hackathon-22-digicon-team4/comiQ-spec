@@ -15,9 +15,6 @@
       "name": "BookSeries"
     },
     {
-      "name": "Book"
-    },
-    {
       "name": "Stamp"
     },
     {
@@ -216,37 +213,6 @@
         ],
         "tags": [
           "BookUserStamp"
-        ]
-      }
-    },
-    "/v1/books/{id}": {
-      "get": {
-        "summary": "書籍の詳細を取得する",
-        "operationId": "Book_Get",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/modelBookDetail"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Book"
         ]
       }
     },
@@ -533,38 +499,7 @@
         "bookSeriesId": {
           "type": "string"
         },
-        "imageUrl": {
-          "type": "string"
-        }
-      }
-    },
-    "modelBookDetail": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "imageUrl": {
-          "type": "string"
-        },
-        "bookPages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/modelBookPage"
-          }
-        }
-      }
-    },
-    "modelBookPage": {
-      "type": "object",
-      "properties": {
-        "bookId": {
-          "type": "string"
-        },
-        "pageNum": {
+        "totalPages": {
           "type": "integer",
           "format": "int64"
         },
