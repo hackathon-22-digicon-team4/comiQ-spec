@@ -121,7 +121,7 @@ message BookSeriesService {
     message Request {
     }
     message Response {
-      repeated model.BookSeries bookseries = 1;
+      repeated model.BookSeries book_series = 1;
     }
   }
   message BookList {

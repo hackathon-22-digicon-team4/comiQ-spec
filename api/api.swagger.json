@@ -443,7 +443,7 @@
     "apiBookSeriesServiceListResponse": {
       "type": "object",
       "properties": {
-        "bookseries": {
+        "bookSeries": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/modelBookSeries"
