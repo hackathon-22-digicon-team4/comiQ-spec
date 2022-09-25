@@ -134,6 +134,25 @@ message BookSeriesService {
   }
 }
 
+service Book {
+  /*
+  書籍を取得する
+  */
+  rpc Get(BookService.Get.Request) returns (model.Book) {
+    option (google.api.http) = {
+        get: "/v1/books/{id}"
+      };
+  };
+}
+
+message BookService {
+  message Get {
+    message Request {
+      string id = 1;
+    }
+  }
+}
+
 service Stamp {
   /*
   スタンプ一覧を取得する
