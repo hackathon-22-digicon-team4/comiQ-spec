@@ -35,3 +35,15 @@ module "production_network" {
   az_1a = "ap-northeast-1a"
   az_1c = "ap-northeast-1c"
 }
+
+# DBインスタンスにアクセスする踏み台サーバー
+# EC2
+module "step_ec2" {
+  source          = "../../modules/ec2"
+  project         = var.project
+  stage           = var.stage
+  public_1a       = module.production_network.public_sub_1a
+  public_1c       = module.production_network.public_sub_1c
+  sg_ec2_alb      = module.production_network.sg_for_ecs
+  sg_ec2_ssh      = module.production_network.sg_for_ssh
+}
