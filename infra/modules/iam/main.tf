@@ -1,8 +1,8 @@
 # ECSのタスク実行ロール
 resource "aws_iam_role" "ecs_task_execution_role" {
-  name               = "${var.project}_${var.stage}_ecs_task_exec_role"
+  name = "${var.project}_${var.stage}_ecs_task_exec_role"
   assume_role_policy = templatefile("${path.module}/json/assume/template.json", {
-    service     = "ecs-tasks"
+    service = "ecs-tasks"
   })
   tags = {
     Name = "${var.project}_${var.stage}_ecs_task_exec_role"
@@ -13,7 +13,7 @@ resource "aws_iam_policy" "s3_env_file_access" {
   description = "secret managerにアクセスできるように"
 
   policy = templatefile("${path.module}/json/env_secret_manager.tpl.json", {
-    env_secret_manager_arn     = var.env_secret_manager.arn
+    env_secret_manager_arn = var.env_secret_manager.arn
   })
   tags = {
     Name = "${var.project}_${var.stage}_env_secret_manager_access"
