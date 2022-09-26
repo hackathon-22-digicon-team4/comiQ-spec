@@ -72,3 +72,9 @@ module "cd" {
   source = "../../modules/cd"
   s3_arn = module.production_frontend.s3_arn
 }
+
+# ECR
+module "production_ecr" {
+  source = "../../modules/ecr"
+  name   = "comiq-server"
+}
