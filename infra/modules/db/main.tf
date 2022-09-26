@@ -1,6 +1,6 @@
 # 1. Auroraが動けるエリアを作成
 resource "aws_db_subnet_group" "it_aurora_db_common" {
-  name       = "${var.project}_db_subnet_group"
+  name       = "comiq_db_subnet_group"
   subnet_ids = [var.private_sub_1a.id, var.private_sub_1c.id]
 }
 
@@ -30,7 +30,7 @@ resource "aws_rds_cluster" "prod" {
 # 3. Auroraインスタンスの作成
 resource "aws_rds_cluster_instance" "it_aurora_db_common" {
   cluster_identifier = aws_rds_cluster.prod.id
-  identifier         = "${var.project}-serverless-instance"
+  identifier         = "comiq-serverless-instance"
 
   engine               = aws_rds_cluster.prod.engine
   engine_version       = aws_rds_cluster.prod.engine_version
