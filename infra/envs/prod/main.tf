@@ -58,3 +58,11 @@ module "production_routing" {
   public_1c  = module.production_network.public_sub_1c
   sg_for_alb = module.production_network.sg_for_alb
 }
+
+# fronend
+module "production_frontend" {
+  source  = "../../modules/frontend"
+  project = var.project
+  stage   = var.stage
+  zone_id = module.production_routing.zone_id
+}
