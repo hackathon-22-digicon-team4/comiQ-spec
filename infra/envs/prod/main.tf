@@ -108,3 +108,11 @@ module "production_ecs" {
   env_secret_manager      = module.production_secret_manager.env_secret_manager
   ecr_repo_uri            = "738925651667.dkr.ecr.ap-northeast-1.amazonaws.com/comiq-server:latest"
 }
+
+# RDS
+module "production_rds" {
+  source         = "../../modules/db"
+  private_sub_1a = module.production_network.private_sub_1a
+  private_sub_1c = module.production_network.private_sub_1c
+  sg_for_rds     = module.production_network.sg_for_rds
+}
