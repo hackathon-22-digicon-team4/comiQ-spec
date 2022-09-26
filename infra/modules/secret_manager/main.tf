@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "env_secret_manager" {
-  name = var.name
+  name        = var.name
   description = "comiQのサーバー用のシークレット"
 }
 
