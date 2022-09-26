@@ -11,10 +11,22 @@ resource "aws_route53_zone" "subdomain" {
   }
 }
 
-#DNSレコード
-resource "aws_route53_record" "dns_record" {
-  zone_id = aws_route53_zone.subdomain.zone_id
+resource "aws_route53_record" "ns_record_for_subdomain" {
   name    = aws_route53_zone.subdomain.name
+  zone_id = aws_route53_zone.subdomain.zone_id
+  records = [
+    aws_route53_zone.subdomain.name_servers[0],
+    aws_route53_zone.subdomain.name_servers[1],
+    aws_route53_zone.subdomain.name_servers[2],
+    aws_route53_zone.subdomain.name_servers[3]
+  ]
+  ttl  = 300
+  type = "NS"
+}
+
+resource "aws_route53_record" "api_dns_record" {
+  zone_id = aws_route53_zone.subdomain.zone_id
+  name    = "api.${aws_route53_zone.subdomain.name}"
   type    = "A"
 
   alias {
@@ -24,9 +36,9 @@ resource "aws_route53_record" "dns_record" {
   }
 }
 
-resource "aws_route53_record" "ns_record_for_subdomain" {
-  name    = aws_route53_zone.subdomain.name
-  zone_id = data.aws_route53_zone.host_zone.zone_id
+resource "aws_route53_record" "ns_record_for_api_subdomain" {
+  name    = "api.${aws_route53_zone.subdomain.name}"
+  zone_id = aws_route53_zone.subdomain.zone_id
   records = [
     aws_route53_zone.subdomain.name_servers[0],
     aws_route53_zone.subdomain.name_servers[1],

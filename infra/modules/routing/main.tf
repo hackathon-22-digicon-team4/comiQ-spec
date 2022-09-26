@@ -73,7 +73,7 @@ resource "aws_lb_target_group" "tg" {
   vpc_id      = var.vpc.id
 
   health_check {
-    path = "/api/v1/"
+    path = "/v1/"
   }
   depends_on = [
     aws_lb.main,

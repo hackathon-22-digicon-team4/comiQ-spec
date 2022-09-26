@@ -1,6 +1,6 @@
 # SSL証明書の作成
 resource "aws_acm_certificate" "make_ssl" {
-  domain_name               = aws_route53_zone.subdomain.name
+  domain_name               = "api.${aws_route53_zone.subdomain.name}"
   subject_alternative_names = []
   validation_method         = "DNS"
 
@@ -12,6 +12,7 @@ resource "aws_acm_certificate" "make_ssl" {
     Name = "${var.project}_${var.stage}_ssl"
   }
 }
+
 # SSl証明書の検証
 resource "aws_route53_record" "ssl_certificate" {
   for_each = {
