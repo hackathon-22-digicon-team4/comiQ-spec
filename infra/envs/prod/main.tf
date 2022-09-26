@@ -84,3 +84,11 @@ module "production_secret_manager" {
   source = "../../modules/secret_manager"
   name   = "comiq-server-env"
 }
+
+# iam module
+module "production_iam" {
+  source             = "../../modules/iam"
+  stage              = var.project
+  project            = var.project
+  env_secret_manager = module.production_secret_manager.env_secret_manager
+}
