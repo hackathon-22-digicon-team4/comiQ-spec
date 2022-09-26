@@ -12,7 +12,7 @@ resource "aws_route53_record" "front_record" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = var.bucket_name
+  bucket = "comiq-frontend"
   tags = {
     Name = "${var.project}_${var.stage}_bucket"
   }
