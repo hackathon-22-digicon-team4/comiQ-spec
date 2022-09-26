@@ -1,9 +1,9 @@
 variable "stage" {
-    description = "Stage of the infrastructure"
-    default = "prod"
+  description = "Stage of the infrastructure"
+  default     = "prod"
 }
 
 variable "project" {
-    description = "Project name"
-    default = "comiQ"
+  description = "Project name"
+  default     = "comiQ"
 }
