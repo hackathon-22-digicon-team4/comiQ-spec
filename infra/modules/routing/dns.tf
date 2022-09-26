@@ -13,7 +13,7 @@ resource "aws_route53_zone" "subdomain" {
 
 resource "aws_route53_record" "ns_record_for_subdomain" {
   name    = aws_route53_zone.subdomain.name
-  zone_id = data.aws_route53_zone.host_zone.arn
+  zone_id = data.aws_route53_zone.host_zone.zone_id
   records = [
     aws_route53_zone.subdomain.name_servers[0],
     aws_route53_zone.subdomain.name_servers[1],

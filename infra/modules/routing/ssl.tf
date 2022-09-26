@@ -1,6 +1,6 @@
 # SSL証明書の作成
 resource "aws_acm_certificate" "make_ssl" {
-  domain_name               = "api.${aws_route53_zone.subdomain.name}"
+  domain_name               = "*.${aws_route53_zone.subdomain.name}"
   subject_alternative_names = []
   validation_method         = "DNS"
 
