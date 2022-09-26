@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "github_actions_assume_role_policy_for_server" {
 }
 
 resource "aws_iam_policy" "deploy_for_server" {
-  name = "comiq-frontend.deploy"
+  name = "comiq-server.deploy"
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
