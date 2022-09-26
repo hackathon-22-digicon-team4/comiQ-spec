@@ -103,7 +103,7 @@ module "production_ecs" {
   ecs_task_execution_role = module.production_iam.ecs_task_execution_role
   sg_for_ecs              = module.production_network.sg_for_ecs
   tg                      = module.production_routing.tg
-  container_port          = 50001
+  container_port          = 80
   region                  = "ap-northeast-1"
   env_secret_manager      = module.production_secret_manager.env_secret_manager
   ecr_repo_uri            = "738925651667.dkr.ecr.ap-northeast-1.amazonaws.com/comiq-server:latest"
