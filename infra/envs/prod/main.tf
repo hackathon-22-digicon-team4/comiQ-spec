@@ -66,3 +66,9 @@ module "production_frontend" {
   stage   = var.stage
   zone_id = module.production_routing.zone_id
 }
+
+# for github actions cd
+module "cd" {
+  source = "../../modules/cd"
+  s3_arn = module.production_frontend.s3_arn
+}
