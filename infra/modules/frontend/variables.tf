@@ -1,9 +1,7 @@
-variable "bucket_name" {
-  type = string
-}
-variable "zone_id" {
-  type = string
-}
+variable "project" {}
+variable "stage" {}
+variable "bucket_name" {}
+variable "zone_id" {}
 locals {
   domain_name = "comiq.kyosutech.com"
 }

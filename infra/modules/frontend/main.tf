@@ -13,6 +13,9 @@ resource "aws_route53_record" "front_record" {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket_name
+  tags = {
+    Name = "${var.project}_${var.stage}_bucket"
+  }
 }
 
 resource "aws_s3_bucket_acl" "website_acl" {
@@ -94,11 +97,14 @@ resource "aws_cloudfront_distribution" "cloudfront" {
       locations        = ["JP"]
     }
   }
-  #viewer_certificate {
-  #  cloudfront_default_certificate = false
-  #  acm_certificate_arn            = "arn:aws:acm:us-east-1:128755073671:certificate/cff3286a-6fee-4fa3-8aec-416e5eb98392"
-  #  ssl_support_method             = "sni-only"
-  #}
+  viewer_certificate {
+    cloudfront_default_certificate = false
+    acm_certificate_arn            = "arn:aws:acm:us-east-1:738925651667:certificate/5a2068f0-cfda-4a56-b90c-25e24689815d"
+    ssl_support_method             = "sni-only"
+  }
+  tags = {
+    Name = "${var.project}_${var.stage}_cloudfront"
+  }
 }
 
 # OAI
