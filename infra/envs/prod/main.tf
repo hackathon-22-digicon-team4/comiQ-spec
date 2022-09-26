@@ -1,11 +1,24 @@
+provider "aws" {
+  region = "ap-northeast-1"
+  default_tags {
+    tags = {
+      service = "comiQ"
+    }
+  }
+}
+
 terraform {
   backend "s3" {
-    bucket  = "digicon-team4-tfstate"
+    bucket  = "comiq-tfstate"
     key     = "terraform.tfstate"
     region  = "ap-northeast-1"
+    encrypt = true
     profile = "comiq"
   }
   required_providers {
-    aws = "~>4.0"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.17.1"
+    }
   }
 }
