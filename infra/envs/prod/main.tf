@@ -78,3 +78,9 @@ module "production_ecr" {
   source = "../../modules/ecr"
   name   = "comiq-server"
 }
+
+# secret manager for server env
+module "production_secret_manager" {
+  source = "../../modules/secret_manager"
+  name   = "comiq-server-env"
+}
