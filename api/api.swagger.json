@@ -140,10 +140,16 @@
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "users",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "me",
+              "ohters",
+              "all"
+            ],
+            "default": "me"
           },
           {
             "name": "stampId",
@@ -163,7 +169,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/BookUserStampServiceCreateResponse"
+              "$ref": "#/definitions/modelBookUserStamp"
             }
           },
           "default": {
@@ -424,16 +430,17 @@
         }
       }
     },
-    "BookUserStampServiceCreateResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
     "BookUserStampServiceDeleteResponse": {
       "type": "object"
+    },
+    "RequestUsers": {
+      "type": "string",
+      "enum": [
+        "me",
+        "ohters",
+        "all"
+      ],
+      "default": "me"
     },
     "UserServiceLoginRequest": {
       "type": "object",
