@@ -163,7 +163,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/BookUserStampServiceCreateResponse"
+              "$ref": "#/definitions/modelBookUserStamp"
             }
           },
           "default": {
@@ -420,14 +420,6 @@
           "format": "int64"
         },
         "stampId": {
-          "type": "string"
-        }
-      }
-    },
-    "BookUserStampServiceCreateResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
           "type": "string"
         }
       }

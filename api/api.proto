@@ -188,7 +188,7 @@ service BookUserStamp {
   ユーザーが押したスタンプ情報を登録する(session認証あり。userIDはセッションから取得する)
   */
   rpc Create(BookUserStampService.Create.Request)
-  returns (BookUserStampService.Create.Response) {
+  returns (model.BookUserStamp) {
     option (google.api.http) = {
         post: "/v1/book_user_stamps"
         body: "*"
@@ -225,9 +225,6 @@ message BookUserStampService {
       uint32 x = 4;
       uint32 y = 5;
       string stamp_id = 6;
-    }
-    message Response {
-      string id = 1;
     }
   }
   message Delete {
