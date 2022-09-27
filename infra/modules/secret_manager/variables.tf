@@ -7,6 +7,3 @@ variable "rds_credential" {
 variable "name" {
   type = string
 }
-variable "stage" {
-  type = string
-}
