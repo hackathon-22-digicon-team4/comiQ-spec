@@ -138,7 +138,7 @@ service Book {
   /*
   書籍を取得する
   */
-  rpc Get(BookService.Get.Request) returns (model.Book) {
+  rpc Get(BookService.Get.Request) returns (BookService.Get.Response) {
     option (google.api.http) = {
         get: "/v1/books/{id}"
       };
@@ -149,6 +149,16 @@ message BookService {
   message Get {
     message Request {
       string id = 1;
+    }
+    message Response {
+      string id = 1;
+      string title = 2;
+      string book_series_id = 3;
+      string book_series_title = 4;
+      string author_id = 5;
+      string author_name = 6;
+      uint32 total_pages = 7;
+      string image_url = 8;
     }
   }
 }
