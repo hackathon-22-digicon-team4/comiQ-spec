@@ -208,9 +208,14 @@ service BookUserStamp {
 message BookUserStampService {
   message List {
     message Request {
+      enum Users {
+        me = 0;
+        ohters = 1;
+        all = 2;
+      }
       string book_series_id = 1;
       string book_id = 2;
-      string user_id = 3;
+      Users users = 3;
       string stamp_id = 4;
     }
     message Response {

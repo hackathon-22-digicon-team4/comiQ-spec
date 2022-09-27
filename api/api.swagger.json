@@ -140,10 +140,16 @@
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "users",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "me",
+              "ohters",
+              "all"
+            ],
+            "default": "me"
           },
           {
             "name": "stampId",
@@ -426,6 +432,15 @@
     },
     "BookUserStampServiceDeleteResponse": {
       "type": "object"
+    },
+    "RequestUsers": {
+      "type": "string",
+      "enum": [
+        "me",
+        "ohters",
+        "all"
+      ],
+      "default": "me"
     },
     "UserServiceLoginRequest": {
       "type": "object",
