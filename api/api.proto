@@ -18,7 +18,7 @@ service User {
       };
   };
   /*
-  ログインする
+  ログインする(sessionを取得する)
   */
   rpc Login(UserService.Login.Request) returns (UserService.Login.Response) {
     option (google.api.http) = {
@@ -36,7 +36,7 @@ service User {
       };
   };
   /*
-  ログアウトする
+  ログアウトする(sessionを削除する)
   */
   rpc Logout(UserService.Logout.Request) returns (UserService.Logout.Response) {
     option (google.api.http) = {
