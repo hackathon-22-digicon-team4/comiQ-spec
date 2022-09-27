@@ -116,3 +116,8 @@ module "production_rds" {
   private_sub_1c = module.production_network.private_sub_1c
   sg_for_rds     = module.production_network.sg_for_rds
 }
+
+# S3 bucket for assets
+module "production_storage" {
+  source = "../../modules/storage"
+}
