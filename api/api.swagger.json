@@ -145,11 +145,11 @@
             "required": false,
             "type": "string",
             "enum": [
+              "all",
               "me",
-              "ohters",
-              "all"
+              "others"
             ],
-            "default": "me"
+            "default": "all"
           },
           {
             "name": "stampId",
@@ -436,11 +436,11 @@
     "RequestUsers": {
       "type": "string",
       "enum": [
+        "all",
         "me",
-        "ohters",
-        "all"
+        "others"
       ],
-      "default": "me"
+      "default": "all"
     },
     "UserServiceLoginRequest": {
       "type": "object",

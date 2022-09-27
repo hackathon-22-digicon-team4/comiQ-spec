@@ -209,9 +209,9 @@ message BookUserStampService {
   message List {
     message Request {
       enum Users {
-        me = 0;
-        ohters = 1;
-        all = 2;
+        all = 0;
+        me = 1;
+        others = 2;
       }
       string book_series_id = 1;
       string book_id = 2;
