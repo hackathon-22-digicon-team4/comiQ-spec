@@ -64,8 +64,8 @@ resource "aws_security_group" "for_rds" {
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
-    from_port       = 5432
-    to_port         = 5432
+    from_port       = 3306
+    to_port         = 3306
     protocol        = "tcp"
     security_groups = [aws_security_group.for_ecs.id]
   }
