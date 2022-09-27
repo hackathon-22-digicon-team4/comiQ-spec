@@ -233,7 +233,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/modelBook"
+              "$ref": "#/definitions/BookServiceGetResponse"
             }
           },
           "default": {
@@ -281,7 +281,7 @@
     },
     "/v1/users/login": {
       "post": {
-        "summary": "ログインする",
+        "summary": "ログインする(sessionを取得する)",
         "operationId": "User_Login",
         "responses": {
           "200": {
@@ -314,7 +314,7 @@
     },
     "/v1/users/logout": {
       "post": {
-        "summary": "ログアウトする",
+        "summary": "ログアウトする(sessionを削除する)",
         "operationId": "User_Logout",
         "responses": {
           "200": {
@@ -401,6 +401,36 @@
           "items": {
             "$ref": "#/definitions/modelBook"
           }
+        }
+      }
+    },
+    "BookServiceGetResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "bookSeriesId": {
+          "type": "string"
+        },
+        "bookSeriesTitle": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        },
+        "authorName": {
+          "type": "string"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "imageUrl": {
+          "type": "string"
         }
       }
     },
