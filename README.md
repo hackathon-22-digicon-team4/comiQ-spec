@@ -1,4 +1,5 @@
 # spec
+
 specification and infrastructure as code
 
 * api/
@@ -6,3 +7,7 @@ specification and infrastructure as code
 * infra/
   * awsインフラ構成
   * terraformによるIaC
+
+## Architecture
+
+![Architecture](architecture/architecture.jpg)
