@@ -47,3 +47,13 @@ message BookUserStamp {
   string stamp_id = 7;
   string book_page_image_url = 8;
 }
+
+/*
+統計情報
+*/
+message BookUserStampCount {
+  string stamp_id = 1;
+  string stamp_name = 2;
+  string stamp_image_url = 3;
+  uint32 count = 4;
+}

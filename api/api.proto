@@ -250,3 +250,27 @@ message BookUserStampService {
     }
   }
 }
+
+service BookUserStampCount {
+  /*
+  ユーザーが押したスタンプの集計を取得する
+  */
+  rpc List(BookUserStampCountService.List.Request)
+  returns (BookUserStampCountService.List.Response) {
+    option (google.api.http) = {
+        get: "/v1/book_user_stamp_counts"
+      };
+  };
+}
+
+message BookUserStampCountService {
+  message List {
+    message Request {
+      string book_series_id = 1;
+      string book_id = 2;
+    }
+    message Response {
+      repeated model.BookUserStampCount book_user_stamp_counts = 1;
+    }
+  }
+}
